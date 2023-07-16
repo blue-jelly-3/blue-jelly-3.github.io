@@ -1,0 +1,86 @@
+[gd_scene load_steps=7 format=3 uid="uid://cwkvapvgnt4dt"]
+
+[ext_resource type="Script" path="res://mainMenu.gd" id="1_nvkyy"]
+[ext_resource type="Texture2D" uid="uid://b8f1gf4k5xwvo" path="res://gameicons/PNG/Black/1x/exitLeft.png" id="2_c4by3"]
+[ext_resource type="Texture2D" uid="uid://eil5vjgq351e" path="res://gameicons/PNG/Black/1x/singleplayer.png" id="3_vfvoc"]
+[ext_resource type="Texture2D" uid="uid://b5vrkofffd2k4" path="res://gameicons/PNG/Black/1x/multiplayer.png" id="4_ffeop"]
+[ext_resource type="Texture2D" uid="uid://dryxuism535or" path="res://gameicons/PNG/Black/1x/gear.png" id="5_kvgbw"]
+
+[sub_resource type="Theme" id="Theme_gpjt2"]
+default_font_size = 100
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nvkyy")
+
+[node name="name" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -309.0
+offset_right = 309.0
+offset_bottom = 147.0
+grow_horizontal = 2
+theme = SubResource("Theme_gpjt2")
+text = "Blue Jelly 3"
+
+[node name="exit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -84.0
+offset_top = -76.0
+offset_right = -26.0
+offset_bottom = -18.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "exit"
+icon = ExtResource("2_c4by3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 6
+
+[node name="single" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "singleplayer"
+icon = ExtResource("3_vfvoc")
+
+[node name="multi" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "multiplayer"
+icon = ExtResource("4_ffeop")
+
+[node name="options" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "options"
+icon = ExtResource("5_kvgbw")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[connection signal="pressed" from="VBoxContainer/single" to="." method="_on_single_pressed"]
+[connection signal="pressed" from="VBoxContainer/multi" to="." method="_on_multi_pressed"]
+[connection signal="pressed" from="VBoxContainer/options" to="." method="_on_options_pressed"]

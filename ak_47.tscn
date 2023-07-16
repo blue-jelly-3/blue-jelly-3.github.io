@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfup5lkj7hw15"]
+
+[ext_resource type="PackedScene" uid="uid://d106xure7o7fy" path="res://assets/ak-47.glb" id="1_qwdup"]
+
+[node name="ak-47" instance=ExtResource("1_qwdup")]
+
+[node name="Sketchfab_model" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 2.22045e-16, 1, 0, -1, 2.22045e-16, -3.69299, 0, 0)

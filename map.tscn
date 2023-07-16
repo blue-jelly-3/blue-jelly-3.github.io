@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3apk8y07cuu8"]
+
+[ext_resource type="Texture2D" uid="uid://ch0wfvkpdoixu" path="res://icon.svg" id="1_uy8m7"]
+[ext_resource type="PackedScene" uid="uid://3l6e5f45bp07" path="res://char.tscn" id="2_065op"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(580, 602.5)
+scale = Vector2(9.09375, 0.789062)
+texture = ExtResource("1_uy8m7")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Icon"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Icon/StaticBody2D"]
+polygon = PackedVector2Array(64, -59.6, 64, 59, 59.6, 64, -59, 64, -64, 59.6, -64, -59.6, -59, -63.9, 59, -64)
+
+[node name="Node2D" parent="." instance=ExtResource("2_065op")]
+position = Vector2(160, 243)

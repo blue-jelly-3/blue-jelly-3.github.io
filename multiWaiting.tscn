@@ -1,0 +1,84 @@
+[gd_scene load_steps=6 format=3 uid="uid://bqdgwr4jcxbor"]
+
+[ext_resource type="Script" path="res://multiWaiting.gd" id="1_kk01e"]
+[ext_resource type="Texture2D" uid="uid://c43ore3aih33m" path="res://gameicons/PNG/Black/1x/open.png" id="1_vpwcj"]
+[ext_resource type="Texture2D" uid="uid://c1fcd0o8gxa82" path="res://gameicons/PNG/Black/1x/plus.png" id="2_wyyfk"]
+[ext_resource type="Texture2D" uid="uid://ht7le5v7k75p" path="res://gameicons/PNG/Black/1x/locked.png" id="4_atrrt"]
+[ext_resource type="Texture2D" uid="uid://b8f1gf4k5xwvo" path="res://gameicons/PNG/Black/1x/exitLeft.png" id="5_gaap1"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kk01e")
+
+[node name="joinLobby" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -419.0
+offset_top = 82.0
+offset_right = -283.0
+offset_bottom = 140.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "join lobby"
+icon = ExtResource("1_vpwcj")
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 129.0
+offset_top = 78.0
+offset_right = 285.0
+offset_bottom = 136.0
+grow_vertical = 2
+disabled = true
+text = "create lobby"
+icon = ExtResource("2_wyyfk")
+
+[node name="TextureRect" type="TextureRect" parent="Button2"]
+layout_mode = 0
+offset_left = -54.0
+offset_top = 5.0
+offset_right = -4.0
+offset_bottom = 55.0
+texture = ExtResource("4_atrrt")
+
+[node name="exit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1003.0
+offset_top = 559.0
+offset_right = 1100.0
+offset_bottom = 617.0
+text = "back"
+icon = ExtResource("5_gaap1")
+
+[node name="TextEdit" type="TextEdit" parent="."]
+layout_mode = 0
+offset_left = 396.0
+offset_top = 288.0
+offset_right = 560.0
+offset_bottom = 325.0
+placeholder_text = "example: roei#123"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 425.0
+offset_top = 266.0
+offset_right = 538.0
+offset_bottom = 291.0
+text = "username"
+
+[connection signal="pressed" from="joinLobby" to="." method="_on_join_lobby_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]
+[connection signal="text_changed" from="TextEdit" to="." method="_on_text_edit_text_changed"]

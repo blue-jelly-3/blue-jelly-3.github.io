@@ -1,0 +1,484 @@
+[gd_scene load_steps=96 format=3 uid="uid://ob8p38wbae5l"]
+
+[ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://addons/ThirdPersonTemplate/Environments/SkyBox.res" id="1_thplc"]
+[ext_resource type="Material" uid="uid://bly25nr0aqsv3" path="res://addons/ThirdPersonTemplate/Environments/Materials/BlueGrid.material" id="2_kqx4o"]
+[ext_resource type="Material" uid="uid://d3up41bo0vjj0" path="res://addons/ThirdPersonTemplate/Environments/Materials/OrangeGrid.material" id="3_c7dms"]
+[ext_resource type="Material" uid="uid://ddpgp1pyklffr" path="res://addons/ThirdPersonTemplate/Environments/Materials/GreenGrid.material" id="4_hppuq"]
+[ext_resource type="Material" uid="uid://cpk3jtowelhgh" path="res://addons/ThirdPersonTemplate/Environments/Materials/PingkGrid.material" id="5_lnci1"]
+[ext_resource type="Material" uid="uid://bquocw2a8n271" path="res://addons/ThirdPersonTemplate/Environments/Materials/GreyGrid.material" id="6_xqjds"]
+[ext_resource type="Texture2D" uid="uid://cx5ugvcdilnw" path="res://assets/levi-frames/levi-frames/frame1.png" id="7_3prui"]
+[ext_resource type="Texture2D" uid="uid://bhdvqc7eifday" path="res://assets/levi-frames/levi-frames/frame2.png" id="8_ur3k1"]
+[ext_resource type="Texture2D" uid="uid://cpybciw7e6vxe" path="res://assets/levi-frames/levi-frames/frame3.png" id="9_nxeky"]
+[ext_resource type="Texture2D" uid="uid://d36bcmj6tob4x" path="res://assets/levi-frames/levi-frames/frame4.png" id="10_ksqpe"]
+[ext_resource type="Texture2D" uid="uid://bxbo4ajpfcim3" path="res://assets/levi-frames/levi-frames/frame5.png" id="11_dri2o"]
+[ext_resource type="Texture2D" uid="uid://damsiwnryl83r" path="res://assets/levi-frames/levi-frames/frame6.png" id="12_1yt11"]
+[ext_resource type="Texture2D" uid="uid://dyvktfej4p5am" path="res://assets/levi-frames/levi-frames/frame7.png" id="13_vnm61"]
+[ext_resource type="Texture2D" uid="uid://bxcudnre231gj" path="res://assets/levi-frames/levi-frames/frame8.png" id="14_dv758"]
+[ext_resource type="Texture2D" uid="uid://1wp1pcd3uixw" path="res://assets/levi-frames/levi-frames/frame9.png" id="15_ks6fy"]
+[ext_resource type="Texture2D" uid="uid://b6tfaomwpi4aw" path="res://assets/levi-frames/levi-frames/frame10.png" id="16_xbror"]
+[ext_resource type="Texture2D" uid="uid://dyl71mhxsxx1a" path="res://assets/levi-frames/levi-frames/frame11.png" id="17_towmd"]
+[ext_resource type="Texture2D" uid="uid://dbx0m5qo1at5a" path="res://assets/levi-frames/levi-frames/frame12.png" id="18_f1wje"]
+[ext_resource type="Texture2D" uid="uid://d33c87np63tv" path="res://assets/levi-frames/levi-frames/frame13.png" id="19_ucody"]
+[ext_resource type="Texture2D" uid="uid://dr2twc47wcxpo" path="res://assets/levi-frames/levi-frames/frame14.png" id="20_6e73b"]
+[ext_resource type="Texture2D" uid="uid://do2qkyjyp14ps" path="res://assets/levi-frames/levi-frames/frame15.png" id="21_ph7s2"]
+[ext_resource type="Texture2D" uid="uid://diuinik4rglgi" path="res://assets/levi-frames/levi-frames/frame16.png" id="22_7glvd"]
+[ext_resource type="Texture2D" uid="uid://ufvfgtlf7vka" path="res://assets/levi-frames/levi-frames/frame17.png" id="23_bbp8n"]
+[ext_resource type="Texture2D" uid="uid://cq8m0jirh0kcw" path="res://assets/levi-frames/levi-frames/frame18.png" id="24_1qmsp"]
+[ext_resource type="Texture2D" uid="uid://but8u4fokq0fd" path="res://assets/levi-frames/levi-frames/frame19.png" id="25_nxp5g"]
+[ext_resource type="Texture2D" uid="uid://c7g51na8xvohb" path="res://assets/levi-frames/levi-frames/frame20.png" id="26_bl5po"]
+[ext_resource type="Texture2D" uid="uid://csii57ahyc65f" path="res://assets/levi-frames/levi-frames/frame21.png" id="27_267he"]
+[ext_resource type="Texture2D" uid="uid://dh2eabklwksdv" path="res://assets/levi-frames/levi-frames/frame22.png" id="28_nhoxy"]
+[ext_resource type="Texture2D" uid="uid://b01de4jry4erq" path="res://assets/levi-frames/levi-frames/frame23.png" id="29_0rnoh"]
+[ext_resource type="Texture2D" uid="uid://o0ykt5ldthi2" path="res://assets/levi-frames/levi-frames/frame24.png" id="30_3mr24"]
+[ext_resource type="Texture2D" uid="uid://ksuoerjs4fg3" path="res://assets/levi-frames/levi-frames/frame25.png" id="31_4ml4j"]
+[ext_resource type="Texture2D" uid="uid://bgstg7qh5sqef" path="res://assets/levi-frames/levi-frames/frame26.png" id="32_cqqe5"]
+[ext_resource type="Texture2D" uid="uid://tovgk4bqjrog" path="res://assets/levi-frames/levi-frames/frame27.png" id="33_ulfur"]
+[ext_resource type="Texture2D" uid="uid://ckcu0kdpdc8xu" path="res://assets/levi-frames/levi-frames/frame28.png" id="34_k2yfb"]
+[ext_resource type="Texture2D" uid="uid://ds5dkrkf3rh08" path="res://assets/levi-frames/levi-frames/frame29.png" id="35_agewi"]
+[ext_resource type="Texture2D" uid="uid://dyitsg4b0fun" path="res://assets/levi-frames/levi-frames/frame30.png" id="36_4rlf7"]
+[ext_resource type="Texture2D" uid="uid://bk3vwqakuknn8" path="res://assets/levi-frames/levi-frames/frame31.png" id="37_a3uic"]
+[ext_resource type="Texture2D" uid="uid://cvww42kejf0dk" path="res://assets/levi-frames/levi-frames/frame32.png" id="38_fhhgg"]
+[ext_resource type="Texture2D" uid="uid://du15tqpllg0nd" path="res://assets/levi-frames/levi-frames/frame33.png" id="39_br1lf"]
+[ext_resource type="Texture2D" uid="uid://cll5fwd20itkk" path="res://assets/levi-frames/levi-frames/frame34.png" id="40_2lpg2"]
+[ext_resource type="Texture2D" uid="uid://43p6tb7d6juh" path="res://assets/levi-frames/levi-frames/frame35.png" id="41_gwlvs"]
+[ext_resource type="Texture2D" uid="uid://6wy5ophpxjkn" path="res://assets/levi-frames/levi-frames/frame36.png" id="42_fg8wl"]
+[ext_resource type="Texture2D" uid="uid://cpucmkn3jbgdi" path="res://assets/levi-frames/levi-frames/frame37.png" id="43_evifi"]
+[ext_resource type="Texture2D" uid="uid://c2xk6l0t5v4ke" path="res://assets/levi-frames/levi-frames/frame38.png" id="44_edcgx"]
+[ext_resource type="Texture2D" uid="uid://c6oniqrapdsoa" path="res://assets/levi-frames/levi-frames/frame39.png" id="45_jgyhe"]
+[ext_resource type="Texture2D" uid="uid://7ph2juhtgt2q" path="res://assets/levi-frames/levi-frames/frame40.png" id="46_gnvpk"]
+[ext_resource type="Texture2D" uid="uid://dk41ii7scvms8" path="res://assets/levi-frames/levi-frames/frame41.png" id="47_ldyn5"]
+[ext_resource type="Texture2D" uid="uid://ctdtsvt8rlv04" path="res://assets/levi-frames/levi-frames/frame42.png" id="48_r57ia"]
+[ext_resource type="Texture2D" uid="uid://b37qwbre1kwbc" path="res://assets/levi-frames/levi-frames/frame43.png" id="49_isnug"]
+[ext_resource type="Texture2D" uid="uid://ba5ug2coi2dr7" path="res://assets/levi-frames/levi-frames/frame44.png" id="50_4lifg"]
+[ext_resource type="Texture2D" uid="uid://cq3mvvysxyg60" path="res://assets/levi-frames/levi-frames/frame45.png" id="51_ucb6x"]
+[ext_resource type="Texture2D" uid="uid://7vmcabgoitwi" path="res://assets/levi-frames/levi-frames/frame46.png" id="52_vmbnx"]
+[ext_resource type="Texture2D" uid="uid://daf5eax6svbmi" path="res://assets/levi-frames/levi-frames/frame47.png" id="53_shoy6"]
+[ext_resource type="Texture2D" uid="uid://cxpngwcqxtyew" path="res://assets/levi-frames/levi-frames/frame48.png" id="54_uqw4c"]
+[ext_resource type="Texture2D" uid="uid://bflspenqdrmbo" path="res://assets/levi-frames/levi-frames/frame49.png" id="55_e8s7s"]
+[ext_resource type="Texture2D" uid="uid://jex5gbwv1u5f" path="res://assets/levi-frames/levi-frames/frame50.png" id="56_ctfcj"]
+[ext_resource type="Texture2D" uid="uid://tytchpvi1cj2" path="res://assets/levi-frames/levi-frames/frame51.png" id="57_obn5t"]
+[ext_resource type="Texture2D" uid="uid://blp1cgjb52le7" path="res://assets/levi-frames/levi-frames/frame52.png" id="58_2hueg"]
+[ext_resource type="Texture2D" uid="uid://00bu0ho8iev8" path="res://assets/levi-frames/levi-frames/frame53.png" id="59_4g67k"]
+[ext_resource type="Texture2D" uid="uid://cq7iy7th5y5fi" path="res://assets/levi-frames/levi-frames/frame54.png" id="60_v0aih"]
+[ext_resource type="Texture2D" uid="uid://bkrkaxnxvl2ns" path="res://assets/levi-frames/levi-frames/frame55.png" id="61_1eds6"]
+[ext_resource type="Texture2D" uid="uid://bhlldo7b1fjnv" path="res://assets/levi-frames/levi-frames/frame56.png" id="62_dl0u3"]
+[ext_resource type="Texture2D" uid="uid://bocci77ky7ae8" path="res://assets/levi-frames/levi-frames/frame57.png" id="63_bjsxr"]
+[ext_resource type="Texture2D" uid="uid://3p030qitohwn" path="res://assets/levi-frames/levi-frames/frame58.png" id="64_or8fi"]
+[ext_resource type="Texture2D" uid="uid://b24uv3gkhulk2" path="res://assets/levi-frames/levi-frames/frame59.png" id="65_c7iie"]
+[ext_resource type="Texture2D" uid="uid://cwgc7a8d2h65p" path="res://assets/levi-frames/levi-frames/frame60.png" id="66_l0wvy"]
+[ext_resource type="Texture2D" uid="uid://ct18vm6rf3fvy" path="res://assets/levi-frames/levi-frames/frame61.png" id="67_6vrrl"]
+[ext_resource type="Texture2D" uid="uid://dkjivt4so754y" path="res://assets/levi-frames/levi-frames/frame62.png" id="68_x3yhw"]
+[ext_resource type="Texture2D" uid="uid://dkr36tt3buaaj" path="res://assets/levi-frames/levi-frames/frame63.png" id="69_3r7nb"]
+[ext_resource type="Texture2D" uid="uid://bl6maylii52mf" path="res://assets/levi-frames/levi-frames/frame64.png" id="70_h3f6v"]
+[ext_resource type="Texture2D" uid="uid://daxjsme7s8pwj" path="res://assets/levi-frames/levi-frames/frame65.png" id="71_cp0fr"]
+[ext_resource type="Texture2D" uid="uid://dqqxlo2ys7k0m" path="res://assets/levi-frames/levi-frames/frame66.png" id="72_30q3g"]
+[ext_resource type="Texture2D" uid="uid://c5nbntb7yhm4t" path="res://assets/levi-frames/levi-frames/frame67.png" id="73_h8k55"]
+[ext_resource type="Texture2D" uid="uid://dfa0frmvv158w" path="res://assets/levi-frames/levi-frames/frame68.png" id="74_b5odv"]
+[ext_resource type="Texture2D" uid="uid://dou6k2tvkfhjb" path="res://assets/levi-frames/levi-frames/frame69.png" id="75_v22xt"]
+[ext_resource type="Texture2D" uid="uid://1rdhgnjoipxs" path="res://assets/levi-frames/levi-frames/frame70.png" id="76_hyxfy"]
+[ext_resource type="Texture2D" uid="uid://cne71cnfckm5i" path="res://assets/levi-frames/levi-frames/frame71.png" id="77_2mctj"]
+[ext_resource type="Texture2D" uid="uid://cid3yua8rkgrx" path="res://assets/levi-frames/levi-frames/frame72.png" id="78_87wnx"]
+[ext_resource type="Texture2D" uid="uid://05clamu8e7ca" path="res://assets/levi-frames/levi-frames/frame73.png" id="79_dw02d"]
+[ext_resource type="Texture2D" uid="uid://dgfhpo1g8jvfc" path="res://assets/levi-frames/levi-frames/frame74.png" id="80_vm1fg"]
+[ext_resource type="Texture2D" uid="uid://bndy6rrxo1nnb" path="res://assets/levi-frames/levi-frames/frame75.png" id="81_75evb"]
+[ext_resource type="Texture2D" uid="uid://bj23eb58ornv3" path="res://assets/levi-frames/levi-frames/frame76.png" id="82_82r15"]
+[ext_resource type="Texture2D" uid="uid://b5oe841c2pjbj" path="res://assets/levi-frames/levi-frames/frame77.png" id="83_8podm"]
+[ext_resource type="Texture2D" uid="uid://cugtdqjiss47y" path="res://assets/levi-frames/levi-frames/frame78.png" id="84_5jn7a"]
+[ext_resource type="Texture2D" uid="uid://dl1io4lmdyk25" path="res://assets/levi-frames/levi-frames/frame79.png" id="85_cg37o"]
+[ext_resource type="Texture2D" uid="uid://qkgalwxex8hv" path="res://assets/levi-frames/levi-frames/frame80.png" id="86_3nh6j"]
+[ext_resource type="Script" path="res://AnimatedSprite3D.gd" id="87_rvnpd"]
+[ext_resource type="PackedScene" uid="uid://dgpjxoygnvyy4" path="res://assets/simple_fpsplayer/Player.tscn" id="88_4y0ev"]
+[ext_resource type="PackedScene" uid="uid://ci52bv1m15cbs" path="res://cars/YellowCar.tscn" id="89_twj5v"]
+
+[sub_resource type="Environment" id="Environment_qyvd4"]
+background_mode = 2
+background_color = Color(0.647059, 0.909804, 0.917647, 1)
+sky = ExtResource("1_thplc")
+ssao_enabled = true
+sdfgi_enabled = true
+adjustment_enabled = true
+adjustment_saturation = 1.15
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_e0b41"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_seee5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_3prui")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ur3k1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_nxeky")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ksqpe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_dri2o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_1yt11")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_vnm61")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_dv758")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_ks6fy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_xbror")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_towmd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_f1wje")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_ucody")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_6e73b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_ph7s2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_7glvd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_bbp8n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_1qmsp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_nxp5g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_bl5po")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_267he")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_nhoxy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_0rnoh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_3mr24")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_4ml4j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_cqqe5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_ulfur")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_k2yfb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_agewi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_4rlf7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_a3uic")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_fhhgg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_br1lf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_2lpg2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_gwlvs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_fg8wl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_evifi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_edcgx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_jgyhe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_gnvpk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_ldyn5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_r57ia")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_isnug")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_4lifg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_ucb6x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_vmbnx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_shoy6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_uqw4c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("55_e8s7s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_ctfcj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_obn5t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_2hueg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("59_4g67k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_v0aih")
+}, {
+"duration": 1.0,
+"texture": ExtResource("61_1eds6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62_dl0u3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("63_bjsxr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("64_or8fi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("65_c7iie")
+}, {
+"duration": 1.0,
+"texture": ExtResource("66_l0wvy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("67_6vrrl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("68_x3yhw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("69_3r7nb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("70_h3f6v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("71_cp0fr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("72_30q3g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("73_h8k55")
+}, {
+"duration": 1.0,
+"texture": ExtResource("74_b5odv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("75_v22xt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("76_hyxfy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("77_2mctj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("78_87wnx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("79_dw02d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("80_vm1fg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("81_75evb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("82_82r15")
+}, {
+"duration": 1.0,
+"texture": ExtResource("83_8podm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("84_5jn7a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("85_cg37o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("86_3nh6j")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 60.0
+}]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tg7pd"]
+rough = true
+bounce = 0.7
+
+[sub_resource type="SphereMesh" id="SphereMesh_3e2x0"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_e5qen"]
+
+[node name="Scene" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0815773, -1.43051e-06, 0.163605)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.892271, -0.274443, 0.358516, 2.02684e-08, 0.794054, 0.607847, -0.451501, 0.542364, -0.708511, 0, 2.76815, 9.26053)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_qyvd4")
+
+[node name="Level" type="Node3D" parent="."]
+
+[node name="Floor" type="CSGBox3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14482, 0)
+use_collision = true
+size = Vector3(118.765, 0.1, 71.8243)
+material = ExtResource("2_kqx4o")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Level"]
+transform = Transform3D(0.833182, 0, 0.552999, 0, 1, 0, -0.552999, 0, 0.833182, 16.5416, 3.19482, -15.014)
+use_collision = true
+size = Vector3(4, 6, 8)
+material = ExtResource("3_c7dms")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Level"]
+transform = Transform3D(-0.318513, 0, 0.947919, 0, 1, 0, -0.947919, 0, -0.318513, 0.541599, 13.1948, 3.986)
+use_collision = true
+size = Vector3(4, 6, 8)
+material = ExtResource("3_c7dms")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2.19482, -6.9983)
+use_collision = true
+size = Vector3(6, 8, 6)
+material = ExtResource("4_hppuq")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.19482, -6.9983)
+use_collision = true
+size = Vector3(4, 4, 6)
+material = ExtResource("4_hppuq")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.19482, -10.9983)
+use_collision = true
+size = Vector3(4, 2, 2)
+material = ExtResource("4_hppuq")
+
+[node name="Node3D" type="Node3D" parent="Level"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -17.521, 4.76836e-07, -18.7606)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Level/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.233154, 0.69482, -0.0343475)
+use_collision = true
+size = Vector3(8, 1, 1)
+material = ExtResource("5_lnci1")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Level/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.76685, 1.69482, -0.0343475)
+use_collision = true
+size = Vector3(4, 1, 1.27309)
+material = ExtResource("5_lnci1")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Level/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.76685, 2.69482, -0.0343475)
+use_collision = true
+material = ExtResource("5_lnci1")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.19482, 4)
+use_collision = true
+size = Vector3(24, 10, 16)
+material = ExtResource("6_xqjds")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Level/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -3, -7)
+operation = 2
+size = Vector3(4, 6, 2)
+material = ExtResource("6_xqjds")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Level/CSGBox3D"]
+transform = Transform3D(-8.9407e-08, 0, 1, 0, 1, 0, -1, 0, -8.9407e-08, 11, -3, 0)
+operation = 2
+size = Vector3(12, 6, 2)
+material = ExtResource("6_xqjds")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Level/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+operation = 2
+size = Vector3(22, 10, 14)
+material = ExtResource("6_xqjds")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Level"]
+navigation_mesh = SubResource("NavigationMesh_e0b41")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Level"]
+transform = Transform3D(0.769243, 0, -0.638956, 0, 1, 0, 0.638956, 0, 0.769243, 16.5616, 3.19482, -3.39607)
+billboard = 2
+shaded = true
+render_priority = 1
+sprite_frames = SubResource("SpriteFrames_seee5")
+animation = &"new_animation"
+script = ExtResource("87_rvnpd")
+
+[node name="Player" parent="." instance=ExtResource("88_4y0ev")]
+MULTIPLAYER = true
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.09136, 7.70995, 0)
+collision_layer = 4
+collision_mask = 513
+physics_material_override = SubResource("PhysicsMaterial_tg7pd")
+max_contacts_reported = 1
+contact_monitor = true
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="RigidBody3D"]
+mesh = SubResource("SphereMesh_3e2x0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("SphereShape3D_e5qen")
+
+[node name="car" parent="." instance=ExtResource("89_twj5v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.08069, 0.19482, 22.7983)
+freeze = true
+MULTIPLAYER = true

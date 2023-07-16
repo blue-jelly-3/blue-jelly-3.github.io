@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://gm85jrotpev6"]
+
+[ext_resource type="Texture2D" uid="uid://b8f1gf4k5xwvo" path="res://gameicons/PNG/Black/1x/exitLeft.png" id="1_ecahl"]
+[ext_resource type="Script" path="res://options.gd" id="1_pvmkr"]
+[ext_resource type="Shader" path="res://levi.gdshader" id="2_1ibo2"]
+[ext_resource type="Texture2D" uid="uid://5sq5l8lxetqj" path="res://gameicons/PNG/Black/2x/barak.webp" id="3_42m81"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cd1t4"]
+shader = ExtResource("2_1ibo2")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pvmkr")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 284.0
+offset_top = 219.0
+offset_right = 370.0
+offset_bottom = 252.0
+text = "enter car"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -114.0
+offset_top = -71.0
+offset_right = -25.0
+offset_bottom = -13.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "exit"
+icon = ExtResource("1_ecahl")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Levi-basic-template" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_cd1t4")
+position = Vector2(544, 268)
+scale = Vector2(2.09766, 2.09766)
+texture = ExtResource("3_42m81")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
