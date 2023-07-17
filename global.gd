@@ -5,7 +5,7 @@ var username = "roei123"
 var appid = 1129814416062427137
 var socket
 var MOUSE_SENSITIVITY = 0.1
-var version = "V-0.2"
+var version = "V-0.3"
 var name2ref
 var realPlayer
 

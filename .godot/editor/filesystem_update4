@@ -2,10 +2,11 @@ res://mainMenu.tscn
 res://redOutline.gdshader
 res://levi.gdshader
 res://text.gdshader
-res://global.gd
 res://MultiPlayerTestArena.tscn
 res://multiplayerPuppet.tscn
 res://assets/simple_fpsplayer/Player.tscn
 res://cars/YellowCar.tscn
 res://spectator.tscn
 res://Playground.tscn
+res://assets/simple_fpsplayer/Player.gd
+res://global.gd

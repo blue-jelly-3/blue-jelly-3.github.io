@@ -115,7 +115,8 @@ func _input(event):
 				print("hit" + name2ref.find_key(ray.get_collider().get_parent()))
 				var hitted = name2ref.find_key(ray.get_collider().get_parent())
 				Global.send_hit_other_player_sig(hitted,weaponDmg)
-				puppet_hit(hitted,weaponDmg)
+				if hitted not in deadPlayers:
+					puppet_hit(hitted,weaponDmg)
 				
 			print(ray.get_collider())
 			shooting=true
@@ -282,7 +283,7 @@ func handlePacket(pak):
 					hitSound.play(0.3)
 					HP -= damage
 					updateHpBar()
-				elif not dead:
+				elif not dead and data["hitData"][0] not in deadPlayers:
 					puppet_hit(data["hitData"][0],damage)
 				
 
