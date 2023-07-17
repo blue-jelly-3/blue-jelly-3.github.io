@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=3 uid="uid://bqu0etoruoovn"]
+
+[ext_resource type="Script" path="res://spectatorHigh.gd" id="1_getwe"]
+[ext_resource type="Script" path="res://spectator.gd" id="1_p2c3x"]
+[ext_resource type="Texture2D" uid="uid://dny3n6i4mttpf" path="res://gameicons/PNG/Black/1x/arrowLeft.png" id="2_6vkcm"]
+[ext_resource type="Texture2D" uid="uid://ds0n8gy3cjq4j" path="res://gameicons/PNG/Black/1x/arrowRight.png" id="3_1ueo1"]
+[ext_resource type="Texture2D" uid="uid://cwrguq4cnvlrl" path="res://assets/backimag.png" id="5_iv7je"]
+
+[node name="baseTrans" type="Node3D"]
+script = ExtResource("1_getwe")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+script = ExtResource("1_p2c3x")
+RESPAWN_TIME = 10.0
+
+[node name="rotation_helper" type="Node3D" parent="CharacterBody3D"]
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/rotation_helper"]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -84.5
+offset_top = -58.0
+offset_right = 84.5
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="previous" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+disabled = true
+icon = ExtResource("2_6vkcm")
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "FREECAM"
+
+[node name="next" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("3_1ueo1")
+
+[node name="respawnTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -256.0
+grow_horizontal = 0
+grow_vertical = 0
+step = 0.0
+value = 80.0
+fill_mode = 4
+texture_progress = ExtResource("5_iv7je")
+tint_under = Color(0.208, 1, 0.00999999, 1)
+tint_over = Color(0.208, 1, 0.00999999, 1)
+tint_progress = Color(0.208, 1, 0.00999999, 1)
+
+[connection signal="pressed" from="HBoxContainer/previous" to="CharacterBody3D" method="_on_previous_pressed"]
+[connection signal="pressed" from="HBoxContainer/next" to="CharacterBody3D" method="_on_next_pressed"]
+[connection signal="timeout" from="respawnTimer" to="CharacterBody3D" method="_on_respawn_timer_timeout"]

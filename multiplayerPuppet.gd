@@ -3,11 +3,16 @@ var wire
 
 var audio
 var nameLabel
+var hitSound
+var hpBar
+@export var MAXHP = 100
+var HP = MAXHP
 func _ready():
 	wire = $rotation_helper/Camera3D/shootingRay/wire
 	audio = $AudioStreamPlayer3D
 	nameLabel = $nameLabel
-
+	hitSound = $hitSound
+	hpBar = $nameLabel/hpBar
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass

@@ -1,10 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://dgpjxoygnvyy4"]
+[gd_scene load_steps=12 format=3 uid="uid://dgpjxoygnvyy4"]
 
 [ext_resource type="Script" path="res://assets/simple_fpsplayer/Player.gd" id="1_1fhis"]
 [ext_resource type="Script" path="res://assets/simple_fpsplayer/ability_grab.gd" id="2_gwqkd"]
 [ext_resource type="PackedScene" uid="uid://cfup5lkj7hw15" path="res://ak_47.tscn" id="3_l3o6f"]
+[ext_resource type="Script" path="res://ak_47.gd" id="4_81yuw"]
 [ext_resource type="Texture2D" uid="uid://cwrguq4cnvlrl" path="res://assets/backimag.png" id="4_lx8vi"]
 [ext_resource type="Texture2D" uid="uid://cfl5smpwlluu3" path="res://assets/grapple.png" id="5_c55bc"]
+[ext_resource type="AudioStream" uid="uid://brt1nrex5afxm" path="res://assets/oof.mp3" id="6_hnqva"]
+[ext_resource type="Texture2D" uid="uid://dpsy7fd83184x" path="res://assets/hpIcon.png" id="8_wok6u"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v76nd"]
 albedo_color = Color(0, 0, 0, 1)
@@ -33,6 +36,7 @@ MOUSE_SENSITIVITY = 0.1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="Camera3D" type="Camera3D" parent="rotation_helper"]
+current = true
 
 [node name="flashlight_player" type="SpotLight3D" parent="rotation_helper/Camera3D"]
 visible = false
@@ -64,6 +68,7 @@ material = SubResource("StandardMaterial3D_v76nd")
 
 [node name="ak-47" parent="rotation_helper" instance=ExtResource("3_l3o6f")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.198928, -0.5, 0.228705)
+script = ExtResource("4_81yuw")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 
@@ -131,6 +136,40 @@ texture = ExtResource("5_c55bc")
 [node name="grappleTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="hitSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_hnqva")
+volume_db = 6.486
+
+[node name="hpBar" type="TextureProgressBar" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -124.0
+offset_right = 124.0
+grow_vertical = 0
+value = 100.0
+fill_mode = 3
+texture_progress = ExtResource("8_wok6u")
+tint_progress = Color(1, 1, 1, 0.603922)
+
+[node name="hpVal" type="Label" parent="hpBar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 0.478431)
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="timeout" from="flashTimer" to="." method="_on_flash_timer_timeout"]
 [connection signal="timeout" from="grappleTimer" to="." method="_on_grapple_timer_timeout"]

@@ -461,8 +461,6 @@ sprite_frames = SubResource("SpriteFrames_seee5")
 animation = &"new_animation"
 script = ExtResource("87_2ws78")
 
-[node name="Player" parent="." instance=ExtResource("8_xyrom")]
-
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.09136, 7.70995, 0)
 collision_layer = 4
@@ -480,3 +478,6 @@ shape = SubResource("SphereShape3D_e5qen")
 [node name="car" parent="." instance=ExtResource("8_3kp0y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.08069, 0.19482, 22.7983)
 freeze = true
+
+[node name="Player" parent="." instance=ExtResource("8_xyrom")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.17127, 1.75036, 3.79286)

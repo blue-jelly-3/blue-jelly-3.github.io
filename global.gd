@@ -4,7 +4,11 @@ var websocket_url = "wss://new-blue-jelly3-websocket-server.jonathanbreitg.repl.
 var username = "roei123"
 var appid = 1129814416062427137
 var socket
-var version = "V-0.1"
+var MOUSE_SENSITIVITY = 0.1
+var version = "V-0.2"
+var name2ref
+var realPlayer
+
 func _ready():
 	username = "roei" + str(randi_range(1000,9999))
 	print(username)
@@ -29,8 +33,11 @@ func start_socket():
 	socket.connect_to_url(websocket_url)
 
 func send_delete_player_sig():
-	socket.send(var_to_bytes({"name" : username , "delete" : true , "left": false,"readd":false}))
-
+	print("sending delete player sig")
+	socket.send(var_to_bytes({"name" : username , "delete" : true , "left": false,"readd":false,"hit":false}))
 func send_readd_player_sig():
-	socket.send(var_to_bytes({"name" : username , "delete" : false , "left": false,"readd":true}))
-
+	socket.send(var_to_bytes({"name" : username , "delete" : false , "left": false,"readd":true,"hit":false}))
+func send_hit_other_player_sig(hurtPlayer,dmg):
+	socket.send(var_to_bytes({"name" : username , "delete" : false , "left": false,"readd":false,"hit":true,"hitData":[hurtPlayer,dmg]}))
+func send_revive_signal():
+	socket.send(var_to_bytes({"name" : username , "delete" : false , "left": false,"readd":true,"hit":false}))

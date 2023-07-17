@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=3 uid="uid://ob8p38wbae5l"]
+[gd_scene load_steps=97 format=3 uid="uid://ob8p38wbae5l"]
 
 [ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://addons/ThirdPersonTemplate/Environments/SkyBox.res" id="1_thplc"]
 [ext_resource type="Material" uid="uid://bly25nr0aqsv3" path="res://addons/ThirdPersonTemplate/Environments/Materials/BlueGrid.material" id="2_kqx4o"]
@@ -89,6 +89,7 @@
 [ext_resource type="Script" path="res://AnimatedSprite3D.gd" id="87_rvnpd"]
 [ext_resource type="PackedScene" uid="uid://dgpjxoygnvyy4" path="res://assets/simple_fpsplayer/Player.tscn" id="88_4y0ev"]
 [ext_resource type="PackedScene" uid="uid://ci52bv1m15cbs" path="res://cars/YellowCar.tscn" id="89_twj5v"]
+[ext_resource type="PackedScene" uid="uid://bqu0etoruoovn" path="res://spectator.tscn" id="90_i6gr4"]
 
 [sub_resource type="Environment" id="Environment_qyvd4"]
 background_mode = 2
@@ -482,3 +483,6 @@ shape = SubResource("SphereShape3D_e5qen")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.08069, 0.19482, 22.7983)
 freeze = true
 MULTIPLAYER = true
+
+[node name="baseTrans" parent="." instance=ExtResource("90_i6gr4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.1207, 3.54875, 8.1573)

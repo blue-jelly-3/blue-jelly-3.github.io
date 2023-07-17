@@ -9,6 +9,8 @@ const DEACCEL = 30
 @export var MOUSE_SENSITIVITY = 0.06
 @export var GRAPPLE_MULT = 2.0
 @export var MULTIPLAYER = false
+@export var HP = 100
+var MAXHP = HP
 # Get the gravity from the project settings to be synced with RigidDynamicBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -28,15 +30,22 @@ var grappling = false
 var wireCord
 var CONNECTED = false
 var puppet
+var dead= false
 var shooting
 var inCar = false
 var grapplingData = [false,Transform3D(),0.001]
-
+var hitSound
+@onready var weapon = $"rotation_helper/ak-47"
+var weaponDmg = 1
+var hpBar
+var hpLabel
 var transgenders = {}
 var players = []
+var deadPlayers = []
 var carTransgender
 var refWires = {}
 var name2ref = {}
+var spectator 
 
 
 var n =0 
@@ -47,6 +56,7 @@ func _ready():
 	if MULTIPLAYER:
 		carTransgender = $"../car".global_transform
 		print("car trans is " + str(carTransgender))
+		Global.realPlayer = self
 		discord_sdk.state = "playing multiPlayer with " + str(n) + " other people!"
 	else:
 		discord_sdk.state = "playing singlePlayer"
@@ -62,7 +72,13 @@ func _ready():
 	wire = $rotation_helper/Camera3D/shootingRay/wire
 	grappleTimer = $grappleTimer
 	car = $"../car"
+	hitSound = $hitSound
+	weaponDmg = weapon.dmg
+	hpBar = $hpBar
+	hpLabel = $hpBar/hpVal
+	spectator = $"../baseTrans"
 	print("puppet is " + str(puppet))
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	#get_tree().get_root().get_node(".").print_tree_pretty()
 func _input(event):
 	# This section controls your player camera. Sensitivity can be changed.
@@ -96,7 +112,10 @@ func _input(event):
 		$flashTimer.start()
 		if (ray.get_collider() != null):
 			if (ray.get_collider().name == "puppetMesh"):
-				print("hit")
+				print("hit" + name2ref.find_key(ray.get_collider().get_parent()))
+				var hitted = name2ref.find_key(ray.get_collider().get_parent())
+				Global.send_hit_other_player_sig(hitted,weaponDmg)
+				puppet_hit(hitted,weaponDmg)
 				
 			print(ray.get_collider())
 			shooting=true
@@ -188,12 +207,14 @@ func _physics_process(delta):
 	if MULTIPLAYER:
 		socket.poll()
 		handleMultiplayer()
-		send_data_marked(global_transform)
+		if not dead:
+			send_data_marked(global_transform)
 		if CONNECTED:
 			for mover in transgenders:
-				var ref = name2ref[mover]
-				ref.global_transform.origin = lerp(ref.global_transform.origin,transgenders[mover].origin,0.5)
-				ref.global_transform.basis = transgenders[mover].basis
+				if mover not in deadPlayers:
+					var ref = name2ref[mover]
+					ref.global_transform.origin = lerp(ref.global_transform.origin,transgenders[mover].origin,0.5)
+					ref.global_transform.basis = transgenders[mover].basis
 			for muWire in refWires:
 				muWire.global_transform = refWires[muWire]
 			car.global_transform.origin = lerp(car.global_transform.origin,carTransgender.origin,0.5)
@@ -210,7 +231,7 @@ func _on_grapple_timer_timeout():
 	$grappleCoolDown/Grapple.visible = false
 
 func send_data_marked(data):
-	print("sending data as " + Global.username)
+	#print("sending data as " + Global.username)
 	socket.send(var_to_bytes([Global.username,data,shooting,grapplingData,inCar]))
 
 func handlePacket(pak):
@@ -218,6 +239,7 @@ func handlePacket(pak):
 	var data=pak.decode_var(0,true)
 	if data is Array:
 		var mover = data[0]
+		#print("got data as " + Global.username + " , data is " + str(data))
 		if mover != Global.username:
 			#movement stuff
 			if mover not in players:
@@ -227,6 +249,7 @@ func handlePacket(pak):
 				discord_sdk.refresh()
 				players.append(mover)
 			if data[4] == false:
+				#print(mover + " moved, recieveing as " + Global.username)
 				transgenders[mover] = data[1]
 			if data[4]:
 				carTransgender = data[1]
@@ -250,6 +273,18 @@ func handlePacket(pak):
 				delete_player(data["name"])
 			if data["readd"]:
 				readd_player(data["name"])
+			if data["hit"]:
+				#if we are hit
+				print("someone got hit")
+				var damage = data["hitData"][1]
+				if data["hitData"][0]==Global.username and not dead:
+					print("we got hit")
+					hitSound.play(0.3)
+					HP -= damage
+					updateHpBar()
+				elif not dead:
+					puppet_hit(data["hitData"][0],damage)
+				
 
 func add_puppet(name):
 	var inst = puppet.instantiate()
@@ -274,13 +309,43 @@ func handleMultiplayer():
 		CONNECTED=false
 
 func delete_player(username):
-	print("deleting")
+	print("deleting " + username + " , as " + Global.username)
 	var ref = name2ref[username]
 	ref.queue_free()
-	name2ref.erase(username)
 	transgenders.erase(username)
+	name2ref.erase(username)
 	refWires.clear()
+	deadPlayers.append(username)
 	
 func readd_player(username):
 	print("readding " + username)
+	if username in deadPlayers:
+		deadPlayers.erase(username)
 	add_puppet(username)
+
+func updateHpBar():
+	var precent = (float(HP)/float(MAXHP))*100.0
+	hpBar.value = precent
+	hpLabel.text = str(HP)
+	if (HP < 0):
+		dead = true
+		Global.send_delete_player_sig()
+		Global.name2ref = name2ref
+		spectator.activate()
+		visible=false
+		#queue_free()
+
+func puppet_hit(other,damage):
+	var refOther = name2ref[other]
+	print(refOther)
+	refOther.hitSound.play(0.3)
+	refOther.HP -= damage
+	refOther.hpBar.set_value(float(refOther.HP)/float(refOther.MAXHP))
+
+func revive():
+	visible=true
+	#respawn point 
+	global_transform.origin = Vector3(0,3.0,0)
+	dead=false
+	Global.send_revive_signal()
+	HP = 100
