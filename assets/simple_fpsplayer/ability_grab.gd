@@ -18,7 +18,7 @@ func _physics_process(delta):
 		$"../../../carPrompt".visible=true
 	else :
 		$"../../../carPrompt".visible=false
-	if Input.is_action_just_pressed("car interact"):
+	if Input.is_action_just_pressed("car_interact"):
 		if can_use:
 			can_use = false
 			if not object_grabbed:

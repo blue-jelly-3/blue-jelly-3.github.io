@@ -1,17 +1,19 @@
+Label
+LineEdit
+TextEdit
+HSlider
+HBoxContainer
+Timer
 ColorRect
 Control
 Button
 VBoxContainer
-Label
 MenuButton
-HBoxContainer
 FileDialog
 ColorPickerButton
 TextureRect
-HSlider
 BoxContainer
 TextureProgressBar
-Timer
 Node3D
 CharacterBody3D
 Camera3D
@@ -20,7 +22,6 @@ ProgressBar
 AudioStreamPlayer3D
 Label3D
 RichTextLabel
-TextEdit
 CSGCylinder3D
 AnimatedSprite3D
 AudioStreamPlayer
@@ -29,5 +30,3 @@ NavigationRegion3D
 NavigationAgent3D
 CollisionShape3D
 CSGMesh3D
-NavigationLink3D
-MeshInstance3D

@@ -97,6 +97,7 @@ text = "press E to enter the car"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.585766, 0.229539, -1.65472)
 stream = SubResource("AudioStreamMP3_23bfc")
 volume_db = -10.0
+bus = &"GunShots"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="AudioStreamPlayer3D"]
 visible = false
@@ -144,6 +145,7 @@ one_shot = true
 [node name="hitSound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("6_hnqva")
 volume_db = 6.486
+bus = &"GunShots"
 
 [node name="hpBar" type="TextureProgressBar" parent="."]
 anchors_preset = 2
@@ -176,7 +178,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="crosshair" type="TextureRect" parent="."]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -226,11 +227,18 @@ text = "main menu"
 
 [node name="ColorRect" type="ColorRect" parent="PauseMenu"]
 visible = false
-layout_mode = 0
-offset_left = -140.0
-offset_top = -313.0
-offset_right = 176.0
-offset_bottom = 363.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -338.0
+offset_right = 300.0
+offset_bottom = 338.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.0313726, 0.0313726, 0.0313726, 0.964706)
 
 [node name="options" type="VBoxContainer" parent="PauseMenu/ColorRect"]
@@ -272,9 +280,8 @@ initial_position = 1
 size = Vector2i(392, 500)
 ok_button_text = "Open"
 file_mode = 0
-root_subfolder = "res://assets/kenney_crosshair-pack/PNG"
+root_subfolder = "res://assets/kenney_crosshair-pack/PNG/White"
 filters = PackedStringArray("*.png", "")
-show_hidden_files = true
 
 [node name="TextureRect" type="TextureRect" parent="PauseMenu/ColorRect/options/HBoxContainer2"]
 material = SubResource("CanvasItemMaterial_8g7ds")
@@ -303,14 +310,43 @@ text = "CONTROLS
 "
 horizontal_alignment = 1
 
-[node name="car interact" type="HBoxContainer" parent="PauseMenu/ColorRect/options"]
+[node name="HBoxContainer7" type="HBoxContainer" parent="PauseMenu/ColorRect/options"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="PauseMenu/ColorRect/options/HBoxContainer7"]
+layout_mode = 2
+text = "mouse sens"
+
+[node name="aimSlider" type="HSlider" parent="PauseMenu/ColorRect/options/HBoxContainer7"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.01
+max_value = 0.2
+step = 0.0
+value = 0.1
+
+[node name="Label2" type="Label" parent="PauseMenu/ColorRect/options/HBoxContainer7"]
+layout_mode = 2
+text = "0."
+
+[node name="TextEdit" type="LineEdit" parent="PauseMenu/ColorRect/options/HBoxContainer7"]
+layout_mode = 2
+auto_translate = false
+localize_numeral_system = false
+text = "1"
+alignment = 1
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+
+[node name="car_interact" type="HBoxContainer" parent="PauseMenu/ColorRect/options"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PauseMenu/ColorRect/options/car interact"]
+[node name="Label" type="Label" parent="PauseMenu/ColorRect/options/car_interact"]
 layout_mode = 2
 text = "enter/exit car"
 
-[node name="Button car interact" type="Button" parent="PauseMenu/ColorRect/options/car interact"]
+[node name="Button car_interact" type="Button" parent="PauseMenu/ColorRect/options/car_interact"]
 layout_mode = 2
 text = "E"
 
@@ -424,10 +460,17 @@ ok_button_text = "Open"
 file_mode = 0
 access = 2
 filters = PackedStringArray("*.mp3")
-show_hidden_files = true
 
-[node name="ButtonBack" type="Button" parent="PauseMenu/ColorRect/options"]
+[node name="Label2" type="Label" parent="PauseMenu/ColorRect/options/HBoxContainer4"]
 layout_mode = 2
+
+[node name="ButtonBack" type="Button" parent="PauseMenu"]
+visible = false
+layout_mode = 2
+offset_left = 347.0
+offset_top = 137.0
+offset_right = 547.0
+offset_bottom = 195.0
 text = "BACK"
 icon = ExtResource("10_wf04m")
 
@@ -439,7 +482,9 @@ icon = ExtResource("10_wf04m")
 [connection signal="pressed" from="PauseMenu/ColorRect/options/HBoxContainer2/ButtonCross" to="." method="_on_button_cross_pressed"]
 [connection signal="file_selected" from="PauseMenu/ColorRect/options/HBoxContainer2/FileDialog" to="." method="_on_file_dialog_file_selected"]
 [connection signal="color_changed" from="PauseMenu/ColorRect/options/HBoxContainer3/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
-[connection signal="pressed" from="PauseMenu/ColorRect/options/car interact/Button car interact" to="." method="_on_button_car_interact_pressed"]
+[connection signal="value_changed" from="PauseMenu/ColorRect/options/HBoxContainer7/aimSlider" to="." method="_on_aim_slider_value_changed"]
+[connection signal="text_changed" from="PauseMenu/ColorRect/options/HBoxContainer7/TextEdit" to="." method="_on_text_edit_text_changed"]
+[connection signal="pressed" from="PauseMenu/ColorRect/options/car_interact/Button car_interact" to="." method="_on_button_car_interact_pressed"]
 [connection signal="pressed" from="PauseMenu/ColorRect/options/flashlight/Button flashlight" to="." method="_on_button_flashlight_pressed"]
 [connection signal="pressed" from="PauseMenu/ColorRect/options/next_spectate/Button next_spectate" to="." method="_on_button_next_spectate_pressed"]
 [connection signal="pressed" from="PauseMenu/ColorRect/options/previous_spectate/Button previous_spectate" to="." method="_on_button_previous_spectate_pressed"]
@@ -449,4 +494,4 @@ icon = ExtResource("10_wf04m")
 [connection signal="value_changed" from="PauseMenu/ColorRect/options/HBoxContainer6/gunSlider" to="." method="_on_gun_slider_value_changed"]
 [connection signal="pressed" from="PauseMenu/ColorRect/options/HBoxContainer4/ButtonSong" to="." method="_on_button_song_pressed"]
 [connection signal="file_selected" from="PauseMenu/ColorRect/options/HBoxContainer4/FileDialogSong" to="." method="_on_file_dialog_song_file_selected"]
-[connection signal="pressed" from="PauseMenu/ColorRect/options/ButtonBack" to="." method="_on_button_back_pressed"]
+[connection signal="pressed" from="PauseMenu/ButtonBack" to="." method="_on_button_back_pressed"]

@@ -20,6 +20,8 @@ var rotation_helper
 var dir = Vector3.ZERO
 var flashlight
 var ray
+@onready var LineEditRegEx = RegEx.new()
+var old_text = ""
 var car
 var audio
 var grappleTimer
@@ -40,6 +42,7 @@ var weaponDmg = 1
 var hpBar
 var hpLabel
 var transgenders = {}
+var velocities = {}
 var players = []
 var deadPlayers = []
 var carTransgender
@@ -78,14 +81,39 @@ func _ready():
 	weaponDmg = weapon.dmg
 	hpBar = $hpBar
 	hpLabel = $hpBar/hpVal
-	spectator = $"../baseTrans"
+	if MULTIPLAYER:
+		spectator = $"../baseTrans"
 	print("puppet is " + str(puppet))
 	pauseMenu = $PauseMenu
 	options = $PauseMenu/ColorRect/options
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	print(Global.crosshair)
+	print(Global.crosshair_color)
+	print(Global.crosshairPath)
 	$crosshair.texture = Global.crosshair
 	$crosshair.modulate = Global.crosshair_color
 	$crosshair.set_size(Vector2(64,64),true)
+	
+	#settings shit
+	LineEditRegEx.compile("^[0-9.]*$")
+	for box in $PauseMenu/ColorRect/options.get_children():
+		if box is HBoxContainer:
+			for potential_button in box.get_children():
+				
+				if potential_button is Button and not potential_button is ColorPickerButton and potential_button.name.length() > "Button ".length() and potential_button.name.contains(" "):
+					print(potential_button.name.get_slice(" ",1))
+					#black magic, dont touch
+					potential_button.text = str(Global.settings["keybinds"][potential_button.name.get_slice(" ",1)][0]).get_slice("(",1).get_slice(")",0)
+					print(potential_button)
+					print(potential_button.text)
+	if Global.customMusicPath != null:
+		$PauseMenu/ColorRect/options/HBoxContainer4/Label2.text = Global.customMusicPath
+	$PauseMenu/ColorRect/options/HBoxContainer/HSlider2.value = AudioServer.get_bus_volume_db(0)
+	$PauseMenu/ColorRect/options/HBoxContainer6/gunSlider.value = AudioServer.get_bus_volume_db(1)
+	$PauseMenu/ColorRect/options/HBoxContainer2/TextureRect.texture = Global.crosshair
+	$PauseMenu/ColorRect/options/HBoxContainer2/TextureRect.set_size(Vector2(64,64),true)
+	$PauseMenu/ColorRect/options/HBoxContainer2/TextureRect.modulate = Global.crosshair_color
+	$PauseMenu/ColorRect/options/HBoxContainer3/ColorPickerButton.color = Global.crosshair_color
 	
 	#get_tree().get_root().get_node(".").print_tree_pretty()
 func _input(event):
@@ -219,11 +247,13 @@ func _physics_process(delta):
 		if not dead:
 			send_data_marked(global_transform)
 		if CONNECTED:
-			for mover in transgenders:
-				if mover not in deadPlayers:
-					var ref = name2ref[mover]
-					ref.global_transform.origin = lerp(ref.global_transform.origin,transgenders[mover].origin,0.5)
-					ref.global_transform.basis = transgenders[mover].basis
+		#	for mover in transgenders:
+			#	if mover not in deadPlayers:
+			#		var ref = name2ref[mover]
+					#ref.global_transform.origin = lerp(ref.global_transform.origin,transgenders[mover].origin,0.5)
+			#		ref.global_transform.basis= lerp(ref.global_transform.basis,transgenders[mover].basis,0.5)
+			#		#ref.velocity = velocities[mover]
+			#		ref.global_transform.origin = lerp(transgenders[mover].origin,transgenders[mover].origin+delta*velocities[mover],0.5)
 			for muWire in refWires:
 				muWire.global_transform = refWires[muWire]
 			car.global_transform.origin = lerp(car.global_transform.origin,carTransgender.origin,0.5)
@@ -241,7 +271,7 @@ func _on_grapple_timer_timeout():
 
 func send_data_marked(data):
 	#print("sending data as " + Global.username)
-	socket.send(var_to_bytes([Global.username,data,shooting,grapplingData,inCar]))
+	socket.send(var_to_bytes([Global.username,data,shooting,grapplingData,inCar,velocity]))
 
 func handlePacket(pak):
 	CONNECTED=true
@@ -260,6 +290,10 @@ func handlePacket(pak):
 			if data[4] == false:
 				#print(mover + " moved, recieveing as " + Global.username)
 				transgenders[mover] = data[1]
+				velocities[mover] = data[5]
+				name2ref[mover].global_transform.origin = lerp(name2ref[mover].global_transform.origin,transgenders[mover].origin,0.5)
+				name2ref[mover].global_transform.basis = lerp(name2ref[mover].global_transform.basis,transgenders[mover].basis,0.5)
+				name2ref[mover].velocity= velocities[mover]
 			if data[4]:
 				carTransgender = data[1]
 			#shooting stuff
@@ -322,6 +356,7 @@ func delete_player(username):
 	var ref = name2ref[username]
 	ref.queue_free()
 	transgenders.erase(username)
+	velocities.erase(username)
 	name2ref.erase(username)
 	refWires.clear()
 	deadPlayers.append(username)
@@ -357,6 +392,7 @@ func revive():
 	global_transform.origin = Vector3(0,3.0,0)
 	dead=false
 	Global.send_revive_signal()
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	HP = 100
 
 
@@ -370,6 +406,7 @@ func _on_button_2_pressed():
 	options.visible = true
 	$PauseMenu/ColorRect.visible=true
 	pauseMenu.get_node("VBoxContainer").visible=false
+	$PauseMenu/ButtonBack.visible=true
 
 
 func _on_buttonCross_pressed():
@@ -406,9 +443,9 @@ func _on_button_song_pressed():
 
 
 func _on_button_car_pressed():
-	$"PauseMenu/ColorRect/options/car interact/Button car interact".text = "-press any key-"
-	InputMap.action_erase_events("car interact")
-	listener = "car interact"
+	$"PauseMenu/ColorRect/options/car_interact/Button car_interact".text = "-press any key-"
+	InputMap.action_erase_events("car_interact")
+	listener = "car_interact"
 	listening=true
 	
 	
@@ -424,6 +461,7 @@ func _on_exit_pressed():
 	if $options.visible:
 		$options.visible=false
 		$VBoxContainer.visible =true
+		$PauseMenu/ButtonBack.visible=false
 
 
 func _on_button_flashlight_pressed():
@@ -488,13 +526,39 @@ func _on_button_car_interact_pressed():
 
 
 func _on_button_back_pressed():
+	$PauseMenu/ButtonBack.visible=false
 	options.visible=false
 	pauseMenu.visible=true
 	pauseMenu.get_node("VBoxContainer").visible=true
 	$PauseMenu/ColorRect.visible=false
+	Global.save_settings()
 
 
 func _on_button_3_pressed():
 	if MULTIPLAYER:
 		Global.send_delete_player_sig()
 	get_tree().change_scene_to_file("res://mainMenu.tscn")
+
+
+func _on_double_check_position_timeout():
+	if MULTIPLAYER and CONNECTED:
+		for mover in transgenders:
+			if mover not in deadPlayers:
+				var ref = name2ref[mover]
+#				ref.global_transform.origin = transgenders[mover].origin
+
+
+func _on_aim_slider_value_changed(value):
+	$options/HBoxContainer7/TextEdit.text = str(value).get_slice(".",1)
+	Global.MOUSE_SENSITIVITY = value
+
+
+func _on_text_edit_text_changed(new_text):
+	if LineEditRegEx.search(new_text):
+		old_text = str(new_text)
+		$options/HBoxContainer7/aimSlider.value = float(new_text) / (10 ** new_text.length())
+		Global.MOUSE_SENSITIVITY = float(new_text) / (10 ** new_text.length())
+	else:
+		print("illegal!!")
+		$options/HBoxContainer7/TextEdit.text = old_text
+	$options/HBoxContainer7/TextEdit.set_caret_column(old_text.length())

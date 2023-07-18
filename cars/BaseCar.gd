@@ -66,7 +66,7 @@ func _physics_process(delta):
 		$wheal2.wheel_friction_slip=3
 		$wheal3.wheel_friction_slip=3
 	steering = move_toward(steering, steer_target, STEER_SPEED * delta)
-	if Input.is_action_just_pressed("car interact") and can_exit:
+	if Input.is_action_just_pressed("car_interact") and can_exit:
 		freeze=true
 		print("creating player again")
 		var player_inst = player_res.instantiate()

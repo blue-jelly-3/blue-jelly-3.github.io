@@ -93,9 +93,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -150.0
-offset_top = -251.5
+offset_top = -316.5
 offset_right = 150.0
-offset_bottom = 251.5
+offset_bottom = 316.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 9
@@ -118,14 +118,13 @@ layout_mode = 2
 text = "pick crosshair"
 
 [node name="FileDialog" type="FileDialog" parent="options/HBoxContainer2"]
-title = "pick crosshair"
+title = "Open a File"
 initial_position = 1
 size = Vector2i(392, 500)
 ok_button_text = "Open"
 file_mode = 0
-root_subfolder = "res://assets/kenney_crosshair-pack/PNG"
+root_subfolder = "res://assets/kenney_crosshair-pack/PNG/White"
 filters = PackedStringArray("*.png", "")
-show_hidden_files = true
 
 [node name="TextureRect" type="TextureRect" parent="options/HBoxContainer2"]
 material = SubResource("CanvasItemMaterial_cfp15")
@@ -154,14 +153,43 @@ text = "CONTROLS
 "
 horizontal_alignment = 1
 
-[node name="car interact" type="HBoxContainer" parent="options"]
+[node name="HBoxContainer7" type="HBoxContainer" parent="options"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="options/HBoxContainer7"]
+layout_mode = 2
+text = "mouse sens"
+
+[node name="aimSlider" type="HSlider" parent="options/HBoxContainer7"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.01
+max_value = 0.2
+step = 0.0
+value = 0.1
+
+[node name="Label2" type="Label" parent="options/HBoxContainer7"]
+layout_mode = 2
+text = "0."
+
+[node name="TextEdit" type="LineEdit" parent="options/HBoxContainer7"]
+layout_mode = 2
+auto_translate = false
+localize_numeral_system = false
+text = "1"
+alignment = 1
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+
+[node name="car_interact" type="HBoxContainer" parent="options"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="options/car interact"]
+[node name="Label" type="Label" parent="options/car_interact"]
 layout_mode = 2
 text = "enter/exit car"
 
-[node name="Button car interact" type="Button" parent="options/car interact"]
+[node name="Button car_interact" type="Button" parent="options/car_interact"]
 layout_mode = 2
 text = "E"
 
@@ -268,14 +296,16 @@ layout_mode = 2
 text = "pick song"
 
 [node name="FileDialogSong" type="FileDialog" parent="options/HBoxContainer4"]
-title = "pick song"
+title = "Open a File"
 initial_position = 1
 size = Vector2i(723, 400)
 ok_button_text = "Open"
 file_mode = 0
 access = 2
 filters = PackedStringArray("*.mp3")
-show_hidden_files = true
+
+[node name="Label2" type="Label" parent="options/HBoxContainer4"]
+layout_mode = 2
 
 [connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="VBoxContainer/single" to="." method="_on_single_pressed"]
@@ -285,7 +315,9 @@ show_hidden_files = true
 [connection signal="confirmed" from="options/HBoxContainer2/FileDialog" to="." method="_on_file_dialog_confirmed"]
 [connection signal="file_selected" from="options/HBoxContainer2/FileDialog" to="." method="_on_file_dialog_file_selected"]
 [connection signal="color_changed" from="options/HBoxContainer3/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
-[connection signal="pressed" from="options/car interact/Button car interact" to="." method="_on_button_car_pressed"]
+[connection signal="value_changed" from="options/HBoxContainer7/aimSlider" to="." method="_on_aim_slider_value_changed"]
+[connection signal="text_changed" from="options/HBoxContainer7/TextEdit" to="." method="_on_text_edit_text_changed"]
+[connection signal="pressed" from="options/car_interact/Button car_interact" to="." method="_on_button_car_pressed"]
 [connection signal="pressed" from="options/flashlight/Button flashlight" to="." method="_on_button_flashlight_pressed"]
 [connection signal="pressed" from="options/next_spectate/Button next_spectate" to="." method="_on_button_next_spectate_pressed"]
 [connection signal="pressed" from="options/previous_spectate/Button previous_spectate" to="." method="_on_button_previous_spectate_pressed"]

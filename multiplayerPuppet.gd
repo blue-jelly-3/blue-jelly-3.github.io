@@ -15,7 +15,7 @@ func _ready():
 	hpBar = $nameLabel/hpBar
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	move_and_slide()
 
 func shootingAnim():
 	audio.pitch_scale = randf_range(1,2.0)

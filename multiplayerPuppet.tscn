@@ -73,6 +73,7 @@ shape = SubResource("CylinderShape3D_4eem4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.585766, 0.229539, -1.65472)
 stream = SubResource("AudioStreamMP3_23bfc")
 volume_db = -10.0
+bus = &"GunShots"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="AudioStreamPlayer3D"]
 visible = false

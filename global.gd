@@ -5,12 +5,16 @@ var username = "roei123"
 var appid = 1129814416062427137
 var socket
 var MOUSE_SENSITIVITY = 0.1
-var version = "V-0.4"
+var version = "V-0.5"
 var name2ref
-@onready var crosshair = load("res://assets/kenney_crosshair-pack/PNG/Black Retina/crosshair038.png")
+@onready var crosshair = load("res://assets/kenney_crosshair-pack/PNG/White/crosshair038.png")
 var realPlayer
 var crosshair_color = Color(1,1,1,1)
+var crosshairPath = "res://assets/kenney_crosshair-pack/PNG/White/crosshair038.png"
 var customMusic = null
+var customMusicPath = null
+var mapping = {}
+var settings = {"crosshairPath":crosshairPath,"crosshair_color":[crosshair_color.r,crosshair_color.g,crosshair_color.b,crosshair_color.a],"customMusicPath":customMusicPath,"MOUSE_SENSITIVITY":MOUSE_SENSITIVITY,"keybinds":mapping,"MASTER_VOLUME":AudioServer.get_bus_volume_db(0),"GUNSHOT_VOLUME":AudioServer.get_bus_volume_db(1)}
 
 func _ready():
 	username = "roei" + str(randi_range(1000,9999))
@@ -30,6 +34,10 @@ func _ready():
 	# discord_sdk.end_timestamp = int(Time.get_unix_time_from_system()) + 3600 # +1 hour in unix time / "01:00 remaining"
 
 	discord_sdk.refresh() # Always refresh after changing the values!
+	var actions = InputMap.get_actions()
+	for action in actions:
+		mapping[action] = InputMap.action_get_events(action)
+	settings["keybinds"] = mapping
 
 func start_socket():
 	socket = WebSocketPeer.new()
@@ -44,3 +52,43 @@ func send_hit_other_player_sig(hurtPlayer,dmg):
 	socket.send(var_to_bytes({"name" : username , "delete" : false , "left": false,"readd":false,"hit":true,"hitData":[hurtPlayer,dmg]}))
 func send_revive_signal():
 	socket.send(var_to_bytes({"name" : username , "delete" : false , "left": false,"readd":true,"hit":false}))
+
+func save_settings():
+	var file_save = FileAccess.open("user://settings-custom.save",FileAccess.WRITE_READ)
+	print(InputMap.to_string())
+	var actions = InputMap.get_actions()
+	for action in actions:
+		mapping[action] = InputMap.action_get_events(action)
+	settings = {"crosshairPath":crosshairPath,"crosshair_color":[crosshair_color.r,crosshair_color.g,crosshair_color.b,crosshair_color.a],"customMusicPath":customMusicPath,"MOUSE_SENSITIVITY":MOUSE_SENSITIVITY,"keybinds":mapping,"MASTER_VOLUME":AudioServer.get_bus_volume_db(0),"GUNSHOT_VOLUME":AudioServer.get_bus_volume_db(1)}
+	file_save.store_line(JSON.stringify(settings))
+	file_save.close()
+	load_settings()
+
+func load_settings():
+	
+	if FileAccess.file_exists("user://settings-custom.save"):
+		var file_save = FileAccess.open("user://settings-custom.save",FileAccess.READ)
+	#print(file_save.get_as_text())
+		var dic = JSON.parse_string(file_save.get_as_text())
+		for setting in dic:
+			settings[setting] = dic[setting]
+	
+	#load music from path
+	
+	customMusicPath = settings["customMusicPath"]
+	if customMusicPath != null:
+		customMusic = AudioStreamMP3.new()
+		var file = FileAccess.open(customMusicPath,FileAccess.READ)
+		customMusic.data = file.get_buffer(file.get_length())
+	
+	#load crosshair
+	crosshairPath = settings["crosshairPath"]
+	crosshair = load(crosshairPath)
+	crosshair_color=Color(settings["crosshair_color"][0],settings["crosshair_color"][1],settings["crosshair_color"][2],settings["crosshair_color"][3])
+	#sens
+	MOUSE_SENSITIVITY=settings["MOUSE_SENSITIVITY"]
+	print(settings)
+	
+	AudioServer.set_bus_volume_db(0,settings["MASTER_VOLUME"])
+	AudioServer.set_bus_volume_db(1,settings["GUNSHOT_VOLUME"])
+	
