@@ -46,6 +46,10 @@ var carTransgender
 var refWires = {}
 var name2ref = {}
 var spectator 
+var pauseMenu
+var options
+var listener
+var listening = false
 
 
 var n =0 
@@ -66,8 +70,6 @@ func _ready():
 	rotation_helper = $rotation_helper
 	flashlight = $rotation_helper/Camera3D/flashlight_player
 	audio = $AudioStreamPlayer3D
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	ray = $rotation_helper/Camera3D/shootingRay
 	wire = $rotation_helper/Camera3D/shootingRay/wire
 	grappleTimer = $grappleTimer
@@ -78,7 +80,13 @@ func _ready():
 	hpLabel = $hpBar/hpVal
 	spectator = $"../baseTrans"
 	print("puppet is " + str(puppet))
+	pauseMenu = $PauseMenu
+	options = $PauseMenu/ColorRect/options
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	$crosshair.texture = Global.crosshair
+	$crosshair.modulate = Global.crosshair_color
+	$crosshair.set_size(Vector2(64,64),true)
+	
 	#get_tree().get_root().get_node(".").print_tree_pretty()
 func _input(event):
 	# This section controls your player camera. Sensitivity can be changed.
@@ -92,10 +100,10 @@ func _input(event):
 	
 	# Release/Grab Mouse for debugging. You can change or replace this.
 	if Input.is_action_just_pressed("ui_cancel"):
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			#open 'pause' menu
+			$crosshair.visible=false
+			pauseMenu.visible=true
 	
 	# Flashlight toggle. Defaults to F on Keyboard.
 	if event is InputEventKey:
@@ -350,3 +358,143 @@ func revive():
 	dead=false
 	Global.send_revive_signal()
 	HP = 100
+
+
+func _on_button_pressed():
+	pauseMenu.visible = false
+	$crosshair.visible=true
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+
+func _on_button_2_pressed():
+	options.visible = true
+	$PauseMenu/ColorRect.visible=true
+	pauseMenu.get_node("VBoxContainer").visible=false
+
+
+func _on_buttonCross_pressed():
+	$PauseMenu/ColorRect/options/HBoxContainer2/FileDialog.set_filters(PackedStringArray(["*.png ; PNG Images"]))
+	$PauseMenu/ColorRect/options/HBoxContainer2/FileDialog.show()
+
+
+func _on_file_dialog_file_selected(path):
+	print("confirmed")
+	
+	print("res://assets/kenney_crosshair-pack/PNG/" + $PauseMenu/ColorRect/options/HBoxContainer2/FileDialog.current_path)
+	var fullpath = "res://assets/kenney_crosshair-pack/PNG/" + $PauseMenu/ColorRect/options/HBoxContainer2/FileDialog.current_path
+	var tex = load(fullpath)
+	#print(typeof($PauseMenu/ColorRect/options/HBoxContainer2/FileDialog.current_path))
+	Global.crosshair=tex
+	$PauseMenu/ColorRect/options/HBoxContainer2/TextureRect.texture = Global.crosshair
+	$crosshair.texture = Global.crosshair
+
+
+func _on_color_picker_button_color_changed(color):
+	Global.crosshair_color = color
+	$PauseMenu/ColorRect/options/HBoxContainer2/TextureRect.modulate = color
+	$crosshair.modulate = color
+
+
+func _on_file_dialog_song_file_selected(path):
+	print(path)
+	Global.customMusic = AudioStreamMP3.new()
+	var file = FileAccess.open(path,FileAccess.READ)
+	Global.customMusic.data = file.get_buffer(file.get_length())
+
+func _on_button_song_pressed():
+	$PauseMenu/ColorRect/options/HBoxContainer4/FileDialogSong.popup()
+
+
+func _on_button_car_pressed():
+	$"PauseMenu/ColorRect/options/car interact/Button car interact".text = "-press any key-"
+	InputMap.action_erase_events("car interact")
+	listener = "car interact"
+	listening=true
+	
+	
+func _unhandled_key_input(event):
+	if listening:
+		print(event)
+		InputMap.action_add_event(listener,event)
+		get_node("PauseMenu/ColorRect/options/"+listener+"/Button "+listener).text = event.as_text()
+		listening=false
+
+
+func _on_exit_pressed():
+	if $options.visible:
+		$options.visible=false
+		$VBoxContainer.visible =true
+
+
+func _on_button_flashlight_pressed():
+	var action = "flashlight"
+	$"PauseMenu/ColorRect/options/flashlight/Button flashlight".text = "-press any key-"
+	InputMap.action_erase_events(action)
+	listener = action
+	listening=true
+
+
+func _on_button_next_spectate_pressed():
+	var action = "next_spectate"
+	get_node("PauseMenu/ColorRect/options/"+action+"/Button "+action).text  = "-press any key-"
+	InputMap.action_erase_events(action)
+	listener = action
+	listening=true
+
+
+func _on_button_previous_spectate_pressed():
+	var action = "previous_spectate"
+	get_node("PauseMenu/ColorRect/options/"+action+"/Button "+action).text  = "-press any key-"
+	InputMap.action_erase_events(action)
+	listener = action
+	listening=true
+
+
+func _on_button_grapple_pressed():
+	var action = "grapple"
+	get_node("PauseMenu/ColorRect/options/"+action+"/Button "+action).text  = "-press any key-"
+	InputMap.action_erase_events(action)
+	listener = action
+	listening=true
+
+
+func _on_button_crouch_pressed():
+	var action = "crouch"
+	get_node("PauseMenu/ColorRect/options/"+action+"/Button "+action).text  = "-press any key-"
+	InputMap.action_erase_events(action)
+	listener = action
+	listening=true
+
+
+func _on_h_slider_2_value_changed(value):
+	var volume = value
+	var As = AudioServer
+	As.set_bus_volume_db(0,value)
+	print(As.get_bus_volume_db(As.get_bus_index("Master")))
+
+
+func _on_gun_slider_value_changed(value):
+	var As = AudioServer
+	As.set_bus_volume_db(1,value)
+	print(As.get_bus_volume_db(As.get_bus_index("GunShots")))
+
+
+func _on_button_cross_pressed():
+	_on_buttonCross_pressed()
+
+
+func _on_button_car_interact_pressed():
+	pass # Replace with function body.
+
+
+func _on_button_back_pressed():
+	options.visible=false
+	pauseMenu.visible=true
+	pauseMenu.get_node("VBoxContainer").visible=true
+	$PauseMenu/ColorRect.visible=false
+
+
+func _on_button_3_pressed():
+	if MULTIPLAYER:
+		Global.send_delete_player_sig()
+	get_tree().change_scene_to_file("res://mainMenu.tscn")

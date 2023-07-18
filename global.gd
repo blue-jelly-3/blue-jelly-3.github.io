@@ -5,9 +5,12 @@ var username = "roei123"
 var appid = 1129814416062427137
 var socket
 var MOUSE_SENSITIVITY = 0.1
-var version = "V-0.3"
+var version = "V-0.4"
 var name2ref
+@onready var crosshair = load("res://assets/kenney_crosshair-pack/PNG/Black Retina/crosshair038.png")
 var realPlayer
+var crosshair_color = Color(1,1,1,1)
+var customMusic = null
 
 func _ready():
 	username = "roei" + str(randi_range(1000,9999))

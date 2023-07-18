@@ -1,13 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://cwkvapvgnt4dt"]
+[gd_scene load_steps=9 format=3 uid="uid://cwkvapvgnt4dt"]
 
 [ext_resource type="Script" path="res://mainMenu.gd" id="1_nvkyy"]
 [ext_resource type="Texture2D" uid="uid://b8f1gf4k5xwvo" path="res://gameicons/PNG/Black/1x/exitLeft.png" id="2_c4by3"]
 [ext_resource type="Texture2D" uid="uid://eil5vjgq351e" path="res://gameicons/PNG/Black/1x/singleplayer.png" id="3_vfvoc"]
 [ext_resource type="Texture2D" uid="uid://b5vrkofffd2k4" path="res://gameicons/PNG/Black/1x/multiplayer.png" id="4_ffeop"]
 [ext_resource type="Texture2D" uid="uid://dryxuism535or" path="res://gameicons/PNG/Black/1x/gear.png" id="5_kvgbw"]
+[ext_resource type="Texture2D" uid="uid://cdc42tw0a8nwn" path="res://assets/kenney_crosshair-pack/PNG/Black/crosshair038.png" id="6_40qst"]
 
 [sub_resource type="Theme" id="Theme_gpjt2"]
 default_font_size = 100
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_cfp15"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -53,10 +56,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -77.0
+offset_top = -93.0
+offset_right = 77.0
+offset_bottom = 93.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 6
@@ -81,6 +84,214 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 
+[node name="options" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -251.5
+offset_right = 150.0
+offset_bottom = 251.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 9
+
+[node name="Label" type="Label" parent="options"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "CROSSHAIR"
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="options"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="options/HBoxContainer2"]
+layout_mode = 2
+text = "crosshair"
+
+[node name="Button" type="Button" parent="options/HBoxContainer2"]
+layout_mode = 2
+text = "pick crosshair"
+
+[node name="FileDialog" type="FileDialog" parent="options/HBoxContainer2"]
+title = "pick crosshair"
+initial_position = 1
+size = Vector2i(392, 500)
+ok_button_text = "Open"
+file_mode = 0
+root_subfolder = "res://assets/kenney_crosshair-pack/PNG"
+filters = PackedStringArray("*.png", "")
+show_hidden_files = true
+
+[node name="TextureRect" type="TextureRect" parent="options/HBoxContainer2"]
+material = SubResource("CanvasItemMaterial_cfp15")
+layout_mode = 2
+texture = ExtResource("6_40qst")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="options"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="options/HBoxContainer3"]
+layout_mode = 2
+text = "crosshair color"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="options/HBoxContainer3"]
+layout_mode = 2
+text = "colo"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="options"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="options/HBoxContainer5"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "CONTROLS
+"
+horizontal_alignment = 1
+
+[node name="car interact" type="HBoxContainer" parent="options"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="options/car interact"]
+layout_mode = 2
+text = "enter/exit car"
+
+[node name="Button car interact" type="Button" parent="options/car interact"]
+layout_mode = 2
+text = "E"
+
+[node name="flashlight" type="HBoxContainer" parent="options"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="options/flashlight"]
+layout_mode = 2
+text = "flashlight"
+
+[node name="Button flashlight" type="Button" parent="options/flashlight"]
+layout_mode = 2
+text = "F"
+
+[node name="next_spectate" type="HBoxContainer" parent="options"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="options/next_spectate"]
+layout_mode = 2
+text = "next player in spectator"
+
+[node name="Button next_spectate" type="Button" parent="options/next_spectate"]
+layout_mode = 2
+text = "k"
+
+[node name="previous_spectate" type="HBoxContainer" parent="options"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="options/previous_spectate"]
+layout_mode = 2
+text = "last player in spectator"
+
+[node name="Button previous_spectate" type="Button" parent="options/previous_spectate"]
+layout_mode = 2
+text = "J"
+
+[node name="grapple" type="HBoxContainer" parent="options"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="options/grapple"]
+layout_mode = 2
+text = "grapple"
+
+[node name="Button grapple" type="Button" parent="options/grapple"]
+layout_mode = 2
+text = "Q"
+
+[node name="crouch" type="HBoxContainer" parent="options"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="options/crouch"]
+layout_mode = 2
+text = "crouch (fly down in spectate)"
+
+[node name="Button crouch" type="Button" parent="options/crouch"]
+layout_mode = 2
+text = "Ctrl"
+
+[node name="Label2" type="Label" parent="options"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "AUDIO"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="options"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="options/HBoxContainer"]
+layout_mode = 2
+text = "master volume  "
+
+[node name="HSlider2" type="HSlider" parent="options/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+min_value = -70.0
+max_value = 70.0
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="options"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="options/HBoxContainer6"]
+layout_mode = 2
+text = "gunshot volume"
+
+[node name="gunSlider" type="HSlider" parent="options/HBoxContainer6"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+min_value = -70.0
+max_value = 70.0
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="options"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="options/HBoxContainer4"]
+layout_mode = 2
+text = "car music"
+
+[node name="ButtonSong" type="Button" parent="options/HBoxContainer4"]
+layout_mode = 2
+text = "pick song"
+
+[node name="FileDialogSong" type="FileDialog" parent="options/HBoxContainer4"]
+title = "pick song"
+initial_position = 1
+size = Vector2i(723, 400)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.mp3")
+show_hidden_files = true
+
+[connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="VBoxContainer/single" to="." method="_on_single_pressed"]
 [connection signal="pressed" from="VBoxContainer/multi" to="." method="_on_multi_pressed"]
 [connection signal="pressed" from="VBoxContainer/options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="options/HBoxContainer2/Button" to="." method="_on_button_pressed"]
+[connection signal="confirmed" from="options/HBoxContainer2/FileDialog" to="." method="_on_file_dialog_confirmed"]
+[connection signal="file_selected" from="options/HBoxContainer2/FileDialog" to="." method="_on_file_dialog_file_selected"]
+[connection signal="color_changed" from="options/HBoxContainer3/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
+[connection signal="pressed" from="options/car interact/Button car interact" to="." method="_on_button_car_pressed"]
+[connection signal="pressed" from="options/flashlight/Button flashlight" to="." method="_on_button_flashlight_pressed"]
+[connection signal="pressed" from="options/next_spectate/Button next_spectate" to="." method="_on_button_next_spectate_pressed"]
+[connection signal="pressed" from="options/previous_spectate/Button previous_spectate" to="." method="_on_button_previous_spectate_pressed"]
+[connection signal="pressed" from="options/grapple/Button grapple" to="." method="_on_button_grapple_pressed"]
+[connection signal="pressed" from="options/crouch/Button crouch" to="." method="_on_button_crouch_pressed"]
+[connection signal="value_changed" from="options/HBoxContainer/HSlider2" to="." method="_on_h_slider_2_value_changed"]
+[connection signal="value_changed" from="options/HBoxContainer6/gunSlider" to="." method="_on_gun_slider_value_changed"]
+[connection signal="pressed" from="options/HBoxContainer4/ButtonSong" to="." method="_on_button_song_pressed"]
+[connection signal="file_selected" from="options/HBoxContainer4/FileDialogSong" to="." method="_on_file_dialog_song_file_selected"]

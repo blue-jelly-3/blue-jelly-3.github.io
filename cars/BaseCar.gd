@@ -20,9 +20,13 @@ var carTransgender
 var refWires = {}
 var name2ref = {}
 var can_exit_frame = false
-
+var startTime = 74
 func _ready():
-	$AudioStreamPlayer3D.play(74)
+	if Global.customMusic != null:
+		$AudioStreamPlayer3D.stream = Global.customMusic
+		$AudioStreamPlayer.stream = Global.customMusic
+		startTime = 0
+	$AudioStreamPlayer3D.play(startTime)
 	var player = $"../Player"
 	#player.connect("tree_exited",entered_car)
 	CONNECTED = MULTIPLAYER
